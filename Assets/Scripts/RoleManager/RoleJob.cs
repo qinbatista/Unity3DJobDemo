@@ -35,6 +35,7 @@ public struct RoleJob : IJobParallelForTransform
         {
             if(transform.position != _targetPosition[index])
             {
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_targetPosition[index] - transform.position), 5.0f * _deltaTime);
                 transform.position = Vector3.MoveTowards(transform.position, _targetPosition[index], 2.0f * _deltaTime);
             }
             else
