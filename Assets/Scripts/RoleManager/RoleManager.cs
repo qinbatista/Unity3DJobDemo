@@ -47,7 +47,7 @@ public class RoleManager : Singleton<RoleManager>
             roleController.RoleIndex = i;
             _roleList.Add(roleController);
             //initial state
-            state[i] = 0;
+            state[i] = 1;//0000001, Idle
         }
     }
 

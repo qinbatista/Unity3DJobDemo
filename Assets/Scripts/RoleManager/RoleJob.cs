@@ -26,16 +26,22 @@ public struct RoleJob : IJobParallelForTransform
     }
     void RoleAI(int index, TransformAccess transform)
     {
-        if (transform.position == _targetPosition[index])
-        {
-            _isWalking = false;
-            _isIdle = true;
-        }
-        else
+        if (_isIdle)
         {
             _isWalking = true;
             _isIdle = false;
-            transform.position = Vector3.MoveTowards(transform.position, _targetPosition[index], 5.0f * _deltaTime);
+        }
+        else if(_isWalking)
+        {
+            if(transform.position != _targetPosition[index])
+            {
+                transform.position = Vector3.MoveTowards(transform.position, _targetPosition[index], 2.0f * _deltaTime);
+            }
+            else
+            {
+                _isWalking = false;
+                _isIdle = true;
+            }
         }
     }
     void UpdateState(int index)
