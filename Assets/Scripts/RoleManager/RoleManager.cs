@@ -13,7 +13,7 @@ public class RoleManager : Singleton<RoleManager>
 
     [Header("Job System")]
     public static Action Event_RoleManagerJobDone;
-    List<RoleConfig> _roleList = new List<RoleConfig>();
+    List<RoleController> _roleList = new List<RoleController>();
     public NativeArray<int> state;// 0000001, Idle, 0000010, Move, 0000100, Attack, 0001000, Dead
     public NativeArray<Vector3> targetPosition;//roles' target position, users will keep moving to this position
     TransformAccessArray _roleTransformAccessArray;//roles' transform
@@ -43,9 +43,9 @@ public class RoleManager : Singleton<RoleManager>
             //set target position
             targetPosition[i] = role.transform.position;
             //set the index of each role
-            RoleConfig roleConfig = role.GetComponent<RoleConfig>();
-            roleConfig.RoleIndex = i;
-            _roleList.Add(roleConfig);
+            RoleController roleController = role.GetComponent<RoleController>();
+            roleController.RoleIndex = i;
+            _roleList.Add(roleController);
             //initial state
             state[i] = 0;
         }
